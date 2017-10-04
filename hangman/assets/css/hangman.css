@@ -1,0 +1,30 @@
+.alphabet {
+    display: inline-block;
+  }
+
+  .unmatched {
+    padding: 5px;
+    background-color: black;
+    color: white;
+  }
+
+  .correct {
+    background-color: green;
+    transition: all 1s ease;
+  }
+
+  .card-style {
+    padding: 4px;
+    margin: 4px;
+  }
+
+  .letter {
+    display: inline-block;
+    padding: 5px;
+    background-color: white;
+    color: white;
+    margin: 2px;
+    width: 21px;
+    height: auto;
+    border-bottom: 1px solid black;
+  }

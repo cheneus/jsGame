@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>RPG</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Added a link to Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script type="text/javascript" src="characPG.js"></script>
+  <style type="text/css">
+  .char {
+    margin: 5px;
+    width: 210px;
+    height: 220px;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+  }
+
+  .infoCard {
+    padding: 1em 1.5em;
+    margin: 1em 2em;
+  }
+
+
+  #king {
+    padding: 4px;
+    border: 2px solid red;
+  }
+
+  #queen {
+    padding: 4px;
+    border: 2px solid blue;
+  }
+
+  #jack {
+    padding: 4px;
+    border: 2px solid green;
+  }
+
+  #joker {
+    padding: 4px;
+    border: 2px solid black;
+  }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!--  <div class="row" id="gameRules">
+      <div class="row">
+        <h2 class="page-header">Instruction for my RPG Game</h2>
+        <ul >
+          <li></li>
+        </ul>
+      <div class="row">
+        <button class="btn btn-primary form-control" id="playBtn">Let's Play</button>
+      </div>
+    </div> -->
+    <!-- game display -->
+    <div class="row" id="RPGgame">
+      <div class=col-sm-12>
+        <!-- character List -->
+        <!-- <div class="col-sm-6"> -->
+        <div class="row text-center">
+          <!-- <div class="col-md-6 col-sm-12" id="characterList"> -->
+          <!-- <div class="row"> -->
+          <img src="assets/images/pikachu.png" class="card-img-top img-fluid rounded mx-auto char" id="king">
+          <img src="assets/images/charmander.png" class="card-img-top img-fluid rounded char" id="queen">
+          <!-- </div> -->
+          <!-- <div class="row"> -->
+          <img src="assets/images/bulbasaur.png" class="card-img-top img-fluid rounded char" id="jack">
+          <img src="assets/images/squirtle.png" class="card-img-top img-fluid rounded char" id="joker">
+          <!-- </div> -->
+          <!-- </div> -->
+        </div>
+        <!-- </div> -->
+        <!-- gameInfo-log -->
+        <!-- <div class="col-sm-6"> -->
+        <!-- game message -->
+        <div class="row">
+          <div class="row" class="" style="background-color: white;">
+            <h1 class="page-header text-center">Info</h1>
+          </div>
+          <div class="row">
+            <div id="gameMessage">
+              <div id="dmgReport" class="bg-warning">
+                <p id="dmgReport1" class="bg-warning"></p>
+                <p id="dmgReport2" class="bg-warning"></p>
+              </div>
+              <div>
+                <p id="gameOver"></p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- card for you -->
+            <div class="col-sm-6  bg-success">
+              <div class="row infoCard">
+                <div class="card">
+                  <div id="player1img" class="text-center">
+                  </div>
+                  <div class="card-block">
+                    <h3 class="card-title">Your Stats</h3>
+                    <div class="row">
+                      <label class="form-control form-inline">NAME :
+                        <span id="player1Name"></span>
+                      </label>
+                      <label class="form-control form-inline">HP :
+                        <span id="player1Hp"></span>
+                      </label>
+                      <label class="form-control form-inline">ATK :
+                        <span id="player1Atk"></span>
+                      </label>
+                    </div>
+                    <div class="row">
+                      <button class="btn btn-primary form-control" id="btnChangePly1">Change</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- card for enemy -->
+            <div class="col-sm-6 bg-danger">
+              <div class="row infoCard">
+                <div class="card">
+                  <div id="player2img" class="text-center">
+                  </div>
+                  <div class="card-block">
+                    <h3 class="card-title">Enemy Stats</h3>
+                    <div class="row">
+                      <label class="form-control form-inline px-1">NAME :
+                        <span id="player2Name"></span>
+                      </label>
+                      <label class="form-control form-inline">HP :
+                        <span id="player2Hp"></span>
+                      </label>
+                      <label class="form-control form-inline">ATK :
+                        <span id="player2Atk"></span>
+                      </label>
+                    </div>
+                    <div class="row">
+                      <button class="btn btn-primary form-control" id="btnChangePly2">Change</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn btn-danger form-control" id="attackBtn"> ATTACK !!</button>
+          </div>
+          <div class="row">
+            <button class="btn btn-danger form-control" id="restartBtn">START A NEW GAME</button>
+          </div>
+        </div>
+      </div>
+      <!--INFO DIV-->
+    </div>
+  </div>
+  <!-- </div> -->
+</body>
+
+</html>

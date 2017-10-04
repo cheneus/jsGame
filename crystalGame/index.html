@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Crystal Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script type="text/javascript" src="game.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <h1 class="page-header text-center">Crystal Game</h1>
+      <div class="row" id="playerStats">
+        <div class="col-md-3">
+          <div class="card card-body bg-light">
+            <h4 class="card-header">Target Score</h4>
+            <span id="targetScore"> 0 </span>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card card-body bg-light">
+            <h4 class="card-header">Current Score</h4>
+            <span id="yourScore"> 0 </span>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card card-body bg-light">
+            <h4 class="card-header">Win</h4>
+            <span id="winScore"> 0 </span>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card card-body bg-light">
+            <h4 class="card-header">Lose</h4>
+            <span id="loseScore"> 0 </span>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="instruction">
+        <div class="col-md-12">
+          <div class="card bg-light">
+            <h4 class="card-header">Instructions</h4>
+            <ol>
+              <li>You will be given a random number at the start of the game : "Target Score"</li>
+              <li>There are four crystals below : Red, Green, Yellow and Blue</li>
+              <li>By clicking on a crystal, you will add a specific amount of points to your total score.</li>
+              <li>You win the game by matching your total score to the random number.</li>
+              <li>You lose the game if your total score goes above the random number.</li>
+              <li>The value of each crystal is hidden from you until you click on it.</li>
+              <li>Each time when the game starts, the game will change the values of each crystal.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="crystal">
+        <div class="col-md-12 mx-1">
+          <div class="row" style="background-color:gray;padding: 2em;">
+            <div class="col-md-3">
+              <img src="assets/red.png" id="redCrystal">
+            </div>
+            <div class="col-md-3">
+              <img src="assets/blue.png" id="blueCrystal">
+            </div>
+            <div class="col-md-3">
+              <img src="assets/green.png" id="greenCrystal">
+            </div>
+            <div class="col-md-3">
+              <img src="assets/yellow.png" id="yellowCrystal">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
