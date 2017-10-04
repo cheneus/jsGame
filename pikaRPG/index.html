@@ -6,64 +6,29 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Added a link to Bootstrap-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <script type="text/javascript" src="characPG.js"></script>
-  <style type="text/css">
-  .char {
-    margin: 5px;
-    width: 210px;
-    height: 220px;
-    margin-left: auto;
-    margin-right: auto;
-    display: inline-block;
-  }
-
-  .infoCard {
-    padding: 1em 1.5em;
-    margin: 1em 2em;
-  }
-
-
-  #king {
-    padding: 4px;
-    border: 2px solid red;
-  }
-
-  #queen {
-    padding: 4px;
-    border: 2px solid blue;
-  }
-
-  #jack {
-    padding: 4px;
-    border: 2px solid green;
-  }
-
-  #joker {
-    padding: 4px;
-    border: 2px solid black;
-  }
-
-  </style>
+  <script type="text/javascript" src="assets/javascript/game.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/game.css">
 </head>
 
 <body>
   <div class="container">
-    <!--  <div class="row" id="gameRules">
-      <div class="row">
-        <h2 class="page-header">Instruction for my RPG Game</h2>
+     <div class="row" id="gameRules" style="margin-top: 20em">
+        <h2 class="page-header" style="padding: 2em">Instruction for my RPG Game</h2>
         <ul >
-          <li></li>
+          <li>HAVE FUN</li>
+          <li>POKEMON DOES NOT EVOLVE</li>
+          <li>FIGURE IT OUT</li>
         </ul>
-      <div class="row">
         <button class="btn btn-primary form-control" id="playBtn">Let's Play</button>
-      </div>
-    </div> -->
+    </div>
     <!-- game display -->
-    <div class="row" id="RPGgame">
+    <div class="row" id="rpgGame">
       <div class=col-sm-12>
+        <h1 class="text-center">My Little RPG Game</h1>
         <!-- character List -->
         <!-- <div class="col-sm-6"> -->
         <div class="row text-center">
+          <h3 class="text-center">The Characters</h3>
           <!-- <div class="col-md-6 col-sm-12" id="characterList"> -->
           <!-- <div class="row"> -->
           <img src="assets/images/pikachu.png" class="card-img-top img-fluid rounded mx-auto char" id="king">

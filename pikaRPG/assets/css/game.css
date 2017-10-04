@@ -1,0 +1,44 @@
+  .char {
+    margin: 5px;
+    width: 135px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+  }
+
+  .infoCard {
+    padding: 1em 1.5em;
+    margin: 1em 2em;
+  }
+
+
+  #king {
+    padding: 4px;
+    border: 2px solid red;
+  }
+
+  #queen {
+    padding: 4px;
+    border: 2px solid blue;
+  }
+
+  #jack {
+    padding: 4px;
+    border: 2px solid green;
+  }
+
+  #joker {
+    padding: 4px;
+    border: 2px solid black;
+  }
+
+  #gameRules {
+    background-color: white;
+  }
+
+  #rpgGame {
+    background-color: white;
+    padding: inherit;
+    margin: 2em;
+  }
