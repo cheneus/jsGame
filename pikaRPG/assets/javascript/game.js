@@ -19,14 +19,15 @@ $(document).ready(function() {
   var theGame = {
     player1: {},
     player2: {},
-    characters: ['king', 'queen', 'jack', 'joker'],
+    characters: ['pikachu', 'charmander', 'bulbasaur', 'squirtle'],
 
     message: {
       defeated: "You have been defeated",
+      lost: "You have lost",
       win: "You have defeated ",
       dealt: "You have dealt ",
       took: "You have taken ",
-      gameOver: "You have defeated everyone",
+      gameOver: "You have defeated everyone, INCLUDING YOURSELF a.k.a. DRAW.",
     },
 
     attack: function() {
@@ -55,14 +56,21 @@ $(document).ready(function() {
       $("#player2Atk").text(this.player2.atk);
       $("#dmgReport1").text(this.message.took + this.player2.atk);
       $("#dmgReport2").text(this.message.dealt + this.player1.atk);
-      if (theGame.player1.hp <= 0) {
+      if (theGame.player1.hp <= 0 && theGame.player2.hp <= 0) {
+        alert("DRAW")
+        $("#gameOver").addClass('bg-warning');
+        $("#gameOver").text(this.message.gameOver);
+        $("#restartBtn").show();
+        $("#attackBtn").hide();
+      } else if (theGame.player1.hp <= 0) {
         alert("GAME OVER!!");
         $("#gameOver").addClass('bg-danger');
-        $("#gameOver").text(this.message.defeated);
-        characters.reset();
-        $('.char').css('display', 'inline-block');
-      }
-      if (theGame.player2.hp <= 0) {
+        $("#gameOver").text(this.message.lost);
+        $("#restartBtn").show();
+        $("#attackBtn").hide();
+        // characters.reset();
+        // $('.char').css('display', 'inline-block');
+      } else if (theGame.player2.hp <= 0) {
         $("#gameOver").addClass('bg-success');
         $("#gameOver").text(this.message.win + this.player2.name);
         // theGame.resetPlayer2Stats();
@@ -113,29 +121,29 @@ $(document).ready(function() {
 
 
   var characters = {
-    king: {
-      name: "king",
+    pikachu: {
+      name: "pikachu",
       baseAtk: 10,
       wounded: false,
       atk: 10,
       hp: 180
     },
-    queen: {
-      name: "queen",
+    charmander: {
+      name: "charmander",
       baseAtk: 22,
       wounded: false,
       atk: 22,
       hp: 120
     },
-    jack: {
-      name: "jack",
+    bulbasaur: {
+      name: "bulbasaur",
       baseAtk: 14,
       wounded: false,
       atk: 14,
       hp: 160
     },
-    joker: {
-      name: "joker",
+    squirtle: {
+      name: "squirtle",
       baseAtk: 18,
       wounded: false,
       atk: 18,
@@ -143,29 +151,29 @@ $(document).ready(function() {
     },
 
     reset: function() {
-      this.king = {
-          name: "king",
+      this.pikachu = {
+          name: "pikachu",
           baseAtk: 10,
           wounded: false,
           atk: 10,
           hp: 200
         },
-        this.queen = {
-          name: "queen",
+        this.charmander = {
+          name: "charmander",
           baseAtk: 22,
           wounded: false,
           atk: 22,
           hp: 140
         },
-        this.jack = {
-          name: "jack",
+        this.bulbasaur = {
+          name: "bulbasaur",
           baseAtk: 14,
           wounded: false,
           atk: 14,
           hp: 180
         },
-        this.joker = {
-          name: "joker",
+        this.squirtle = {
+          name: "squirtle",
           baseAtk: 18,
           wounded: false,
           atk: 18,
@@ -207,6 +215,7 @@ $(document).ready(function() {
       characters.reset();
       theGame.resetPlayer1Stats();
       theGame.resetPlayer2Stats();
+      $('#characterDisplay').show();
       $('img').show();
       $("#attackBtn").show();
       $("#restartBtn").hide();
@@ -251,6 +260,9 @@ $(document).ready(function() {
     }
     // $(this).css('display', 'none');
     $(this).hide();
+    if (theGame.enemies.length == 1) {
+      $('#characterDisplay').hide();
+    }
   }
 
   // $(this.remove());
