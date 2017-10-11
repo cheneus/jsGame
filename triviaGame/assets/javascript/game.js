@@ -24,7 +24,7 @@ $(document).ready(function() {
       answer: "c",
     },
     q3: {
-      question: "Given that a Diglett and a Raichu have the exact same stats and ability (not going to happen), who will do more damage to identical enemy Pokémon when using Dig?",
+      question: "Given that a Diglett and a Raichu have the exact same stats and ability (not going to happen), who will do more damage to identical enemy Pokemon when using Dig?",
 
       choice: {
         a: "Raichu",
@@ -46,7 +46,42 @@ $(document).ready(function() {
       },
       answer: "a",
     },
+    q5: {
+      question: "What does a Pokemon's nature do?",
 
+      choice: {
+        a: "The nature of a Pokemon increases one stat by 10% and decreases another by 10%.",
+
+        b: "It will affect the behaviour of the Pokemon in the game.",
+        c: "It will have an effect on the Pokemon's happiness.",
+        d: "Nothing. It is just a cool thing to have.",
+      },
+      answer: "a",
+    },
+    q6: {
+      question: "Wooper is introduced in which Pokemon generation?",
+
+      choice: {
+        a: "1st",
+
+        b: "2nd",
+        c: "3rd",
+        d: "4th",
+      },
+      answer: "b",
+    },
+    q7: {
+      question: "Which Pokemon is the very first one you see in the history of Pokemon games? ",
+
+      choice: {
+        a: "Pikachu",
+
+        b: "Nidoking",
+        c: "Lapras",
+        d: "Gengar",
+      },
+      answer: "d",
+    },
   }
 
   // function currentQuestion(question, choice) {
@@ -131,16 +166,19 @@ $(document).ready(function() {
         if (this.yourAnswer[i] == this.theAnswer[i]) {
           this.correctCount++;
           console.log(this.correctCount);
-        }
-        else {
-        	$('#qTitle').append(gameLogic.testArr[i].question)
-        	$('#qAnswer').append(gameLogic.testArr[i].answer)
+        } else {
+          var tempAns = gameLogic.testArr[i].answer;
+          $('#correctAns').append("<h4 class='card-title'>Question "+(i+1)+"<h4>")
+          $('#correctAns').append("<p class='card-text'>"+gameLogic.testArr[i].question+"</p>");
+          $('#correctAns').append("<p class='card-text'>Corrent Answer : "+gameLogic.testArr[i].choice[tempAns]+"</p>");
         }
       }
       $("#yourScore").text(this.correctCount);
     },
 
   } // end of Game Logic
+
+
 
   var timer = {
     time: 30,
@@ -152,14 +190,18 @@ $(document).ready(function() {
         timer.running = true;
       }
     },
+
+    stop: function() {
+      clearInterval(intervalId);
+      clockRunning = false;
+    },
     count: function() {
       timer.time--;
       $('#timerDisplay').text(timer.time);
       console.log(timer.time);
       if (timer.time == 0) {
         gameLogic.finalResult();
-        clearInterval(intervalId);
-        timer.running = false;
+        timer.stop();
       }
     }
   }
@@ -184,10 +226,9 @@ $(document).ready(function() {
       gameLogic.theAnswer.push(question.answer);
       console.log(gameLogic.theAnswer);
       console.log("click");
-      if (gameLogic.keys.length === 0) {
+      if (gameLogic.yourAnswer.length == 4) {
         gameLogic.finalResult();
-        clearInterval(intervalId);
-        timer.running = false;
+        timer.stop();
       } else {
         gameLogic.render();
       }
