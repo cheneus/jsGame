@@ -58,6 +58,7 @@ $(document).ready(function() {
   // }
 
   var gameLogic = {
+    testArr: [],
     question: {},
     yourAnswer: [],
     theAnswer: [],
@@ -74,6 +75,7 @@ $(document).ready(function() {
         this.theAnswer = [],
         this.questionCheck = [],
         this.correctCount = 0;
+      timer.time = 30;
     },
 
     random: function(obj) {
@@ -130,11 +132,16 @@ $(document).ready(function() {
           this.correctCount++;
           console.log(this.correctCount);
         }
+        else {
+        	$('#qTitle').append(gameLogic.testArr[i].question)
+        	$('#qAnswer').append(gameLogic.testArr[i].answer)
+        }
       }
       $("#yourScore").text(this.correctCount);
     },
 
   } // end of Game Logic
+
   var timer = {
     time: 30,
     running: false,
@@ -158,6 +165,7 @@ $(document).ready(function() {
   }
 
   var btnHandler = {
+
     start: function() {
       // $('#startPage').hide();
       gameLogic.random(trivia);
@@ -170,6 +178,8 @@ $(document).ready(function() {
 
     submitAns: function() {
       gameLogic.yourAnswer.push($("input[name=multiChoice]:checked").val());
+      gameLogic.testArr.push(question);
+      console.log(gameLogic.testArr);
       console.log($("input[name=multiChoice]:checked").val());
       gameLogic.theAnswer.push(question.answer);
       console.log(gameLogic.theAnswer);
