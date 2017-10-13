@@ -13,7 +13,7 @@ $(document).ready(function() {
       answer: "b",
     },
     q2: {
-      question: "Which one is nt a Pokemon?",
+      question: "Which one is not a Pokemon?",
 
       choice: {
         a: "Pikachu",
@@ -39,7 +39,6 @@ $(document).ready(function() {
 
       choice: {
         a: "A Pokemon with Levitate is not affected by ground-type moves regardless of the Pokemon with the ability.",
-
         b: "It helps you avoid wild Pokemon because you can float over them.",
         c: "It makes the Pokemon with Levitate faster due to flying capabilities.",
         d: "Levitate makes the moves \"Fly\" and \"Bounce\" stronger due to the ability to go to higher altitudes.",
@@ -51,7 +50,6 @@ $(document).ready(function() {
 
       choice: {
         a: "The nature of a Pokemon increases one stat by 10% and decreases another by 10%.",
-
         b: "It will affect the behaviour of the Pokemon in the game.",
         c: "It will have an effect on the Pokemon's happiness.",
         d: "Nothing. It is just a cool thing to have.",
@@ -62,11 +60,10 @@ $(document).ready(function() {
       question: "Wooper is introduced in which Pokemon generation?",
 
       choice: {
-        a: "1st",
-
-        b: "2nd",
-        c: "3rd",
-        d: "4th",
+        a: "1st Gen",
+        b: "2nd Gen",
+        c: "3rd Gen",
+        d: "4th Gen",
       },
       answer: "b",
     },
@@ -75,7 +72,6 @@ $(document).ready(function() {
 
       choice: {
         a: "Pikachu",
-
         b: "Nidoking",
         c: "Lapras",
         d: "Gengar",
@@ -83,14 +79,6 @@ $(document).ready(function() {
       answer: "d",
     },
   }
-
-  // function currentQuestion(question, choice) {
-  //   var obj = {
-  //     question: question,
-  //     choice: choice,
-  //   };
-  //   return obj
-  // }
 
   var gameLogic = {
     testArr: [],
@@ -121,9 +109,7 @@ $(document).ready(function() {
         }
       }
     },
-    // for (var prop in obj) {
 
-    // }
     pickRandomProperty: function() {
       questionChoosen = gameLogic.keys[Math.floor(Math.random() * this.keys.length)];
       console.log(this.questionCheck)
@@ -134,20 +120,6 @@ $(document).ready(function() {
         gameLogic.keys.splice(Qindex, 1);
       }
       return question = trivia[questionChoosen];
-      // if (this.questionCheck.includes(questionChoosen) === false) {
-      //   // this.questionCheck.push(keys[Math.floor(Math.random() * keys.length)]);
-      //   this.questionCheck.push(questionChoosen)
-      //   return question = trivia[questionChoosen];
-      // } else {
-      //   if (gameLogic.questionCheck.length == 4) {
-      //     gameLogic.render();
-      //   } else {
-      //     gameLogic.finalResult();
-
-      //   }
-      //   console.log("rerun");
-      //   this.pickRandomProperty();
-      // }
     },
 
     render: function() {
@@ -168,7 +140,7 @@ $(document).ready(function() {
           console.log(this.correctCount);
         } else {
           var tempAns = gameLogic.testArr[i].answer;
-          $('#correctAns').append("<h4 class='card-title'>Question "+(i+1)+"<h4>")
+          $('#correctAns').append("<h4 class='card-title p-2'>Question "+(i+1)+"<h4>")
           $('#correctAns').append("<p class='card-text'>"+gameLogic.testArr[i].question+"</p>");
           $('#correctAns').append("<p class='card-text'>Corrent Answer : "+gameLogic.testArr[i].choice[tempAns]+"</p>");
         }

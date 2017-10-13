@@ -1,3 +1,17 @@
 #startBtn {
-	margin: 20em;
+	margin-top: 8em;
+	padding: 4em 2em;
+}
+
+.bg {
+	background: url(../images/background.jpg);
+	width: 100%;
+}
+
+.jumbo-custom {
+	background-color: #ffffff;
+}
+
+.default-bg {
+	background-color: #ffffff;
 }
