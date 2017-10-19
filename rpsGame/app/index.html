@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase Chat</title>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+  <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA51thKHAo9db7K65hoewIDX_1gtWJQCyg",
+    authDomain: "rps-game-a65e8.firebaseapp.com",
+    databaseURL: "https://rps-game-a65e8.firebaseio.com",
+    projectId: "rps-game-a65e8",
+    storageBucket: "rps-game-a65e8.appspot.com",
+    messagingSenderId: "586915720725"
+  };
+  firebase.initializeApp(config);
+
+  </script>
+  <script>
+  var usernameInput = $('#username');
+  var textInput = $('#text');
+  var postButton = $('#post');
+
+  postButton.on("click", function() {
+    var msgUser = usernameInput.value;
+    var msgText = textInput.value;
+     myFirebase.push({username:msgUser, text:msgText});
+      textInput.value = "";
+  });
+
+  </script>
+</head>
+
+<body>
+  <input id="username" type="text" placeholder="Name">
+  <br/>
+  <input id="text" type="text" placeholder="Message">
+  <br/>
+  <button id="post">Post</button>
+  <br/>
+  <div id="results"></div>
+  <script>
+  // <!-- we'll be adding code here -->
+
+  </script>
+</body>
+
+</html>
