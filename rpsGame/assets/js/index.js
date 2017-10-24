@@ -24,18 +24,19 @@
  function startGame() {
    database.ref("player/player1").set({ id: "", displayName: "" });
    database.ref("player/player2").set({ id: "", displayName: "" });
-      database.ref("session").set({turn: 0});
+   database.ref("session").set({ turn: 0 });
  }
 
  function checkPlayers() {
    database.ref("player").once('value', function(snapshot) {
      if (snapshot.child("player1/id").val() == "" && snapshot.child("player1/id").val() != username) {
-     		console.log("you are player 1");
-     		playerNo =  "player1"
-       return database.ref("player/player1").update({ id: username, displayName: yourDisplayName })
+       console.log("you are player 1");
+       playerNo = "player1"
+       return database.ref("player/player1").set({ id: username, displayName: yourDisplayName, choice:"" })
      } else if (snapshot.child("player2/id").val() == "" && snapshot.child("player2/id").val() != username) {
-       console.log("player1 is added ad");
-       return database.ref("player/player2").update({ id: username, displayName: yourDisplayName })
+       console.log("you are player 2");
+       playerNo = "player2"
+       return database.ref("player/player2").set({ id: username, displayName: yourDisplayName, choice:"" })
      }
    });
  }
@@ -51,7 +52,7 @@
 
  $('#postBtn').on("click", function() {
    console.log("working");
-   var msgUser = $('#yourName').text();
+   var msgUser = yourDisplayName;
    var msgText = textInput.val();
    console.log(msgUser + msgText);
    database.ref("chat").push({ username: msgUser, text: msgText });

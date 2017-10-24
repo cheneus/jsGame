@@ -20,18 +20,21 @@
  });
 
  $('#loginOutBtn').on('click', function() {
-   firebase.auth().signOut();
-   $('#chatOutput').append("<div><b>" + $('#yourName').text() + "</b> Has Signed Out...!</div");
+     var logOutText = "has signed out..!";
+   // $('#chatOutput').append("<div><b>" + $('#yourName').text() + "</b> Has Signed Out...!</div");
    database.ref("player").on('value', function(snapshot) {
-     if (snapshot.child("player1/id").val() == username) {
-     database.ref("player/player1").remove();
-       database.ref("player/player1").update({ id: "", displayName: "" })
-     } else if (snapshot.child("player2/id").val() == username) {
-       console.log("player1 is added ad");
-       database.ref("player/player2").update({ id: "", displayName: "" })
-     }
+     // if (snapshot.child("player1/id").val() == username) {
+     // database.ref("player/player1").remove();
+     //   database.ref("player/player1").update({ id: "", displayName: "" })
+     // } else if (snapshot.child("player2/id").val() == username) {
+     //   console.log("player1 is added ad");
+     //   database.ref("player/player2").update({ id: "", displayName: "" })
+     // }
+     database.ref("player/" + playerNo).remove();
+     firebase.auth().signOut();
    })
 
+   database.ref("chat").push({ username: yourDisplayName, text: logOutText });
 
    //   if (playerRef.child("player2") == username) {
    //   database.ref("player").update({ player2: ''});
