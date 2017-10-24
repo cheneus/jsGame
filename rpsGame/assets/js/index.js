@@ -1,10 +1,53 @@
- var usernameInput = $('#username');
+ // var usernameInput = $('#username');
  var textInput = $('#text');
  var database = firebase.database();
+ var username = '';
+ var yourDisplayName = ''
+ const playerRef = database.ref("player");
+
+ var checkId = function() {
+   database.ref("player").on('value', function(snapshot) {
+     console.log(snapshot.val());
+     console.log(snapshot.numChildren())
+     console.log(snapshot.length);
+
+     // var msgUsernameElement = document.createElement("b");
+     // msgUsernameElement.textContent = msg.username;
+     // $('#chatOutput').append("<div><b>"+msg.username+"</b><p>"+msg.text+"</p></div");
+   });
+ }
+ // checkId();
+
+ $('#cID').on('click', startGame);
+
+ function startGame() {
+   database.ref("player/player1").set({ id: "", displayName: "" });
+   database.ref("player/player2").set({ id: "", displayName: "" });
+ }
+
+ function checkPlayers() {
+   database.ref("player").once('value', function(snapshot) {
+     if (snapshot.child("player1/id").val() == "" && snapshot.child("player1/id").val() != username) {
+       return database.ref("player/player1").update({ id: username, displayName: yourDisplayName })
+     } else if (snapshot.child("player2/id").val() == "" && snapshot.child("player2/id").val() != username) {
+       console.log("player1 is added ad");
+       return database.ref("player/player2").update({ id: username, displayName: yourDisplayName })
+     }
+   });
+ }
+
+ database.ref(".info/connected").on("value", function(snap) {
+   if (snap.val() === true) {
+     console.log(true);
+   } else {
+     console.log(false)
+   }
+ })
+
 
  $('#postBtn').on("click", function() {
    console.log("working");
-   var msgUser = usernameInput.val();
+   var msgUser = $('#yourName').text();
    var msgText = textInput.val();
    console.log(msgUser + msgText);
    database.ref("chat").push({ username: msgUser, text: msgText });
@@ -15,80 +58,11 @@
    database.ref("chat").on('child_added', function(snapshot) {
      var msg = snapshot.val();
 
-     var msgUsernameElement = document.createElement("b");
-     msgUsernameElement.textContent = msg.username;
-
-     var msgTextElement = document.createElement("p");
-     msgTextElement.textContent = msg.text;
-
-
-
-     var msgElement = document.createElement("div");
-     msgElement.appendChild(msgUsernameElement);
-     msgElement.appendChild(msgTextElement);
-     msgElement.className = "msg";
-     document.getElementById("results").appendChild(msgElement);
+     // var msgUsernameElement = document.createElement("b");
+     // msgUsernameElement.textContent = msg.username;
+     $('#chatOutput').append("<div><b>" + msg.username + "</b><p>" + msg.text + "</p></div");
    });
  }
 
  // Begin listening for data
  startListening();
-
- // firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
- //   // Handle Errors here.
- //   var errorCode = error.code;
- //   var errorMessage = error.message;
- //   // ...
- // });
-
- // firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
- //   // Handle Errors here.
- //   var errorCode = error.code;
- //   var errorMessage = error.message;
- //   // ...
- // });
-
- // firebase.auth().onAuthStateChanged(function(user) {
- //   if (user) {
- //     // User is signed in.
- //     var displayName = user.displayName;
- //     var email = user.email;
- //     var emailVerified = user.emailVerified;
- //     var photoURL = user.photoURL;
- //     var isAnonymous = user.isAnonymous;
- //     var uid = user.uid;
- //     var providerData = user.providerData;
- //     // ...
- //   } else {
- //     // User is signed out.
- //     // ...
- //   }
- // });
- // addEventListner , run signIn
- $('#loginBtn').on('click', function() {
-   firebase.auth().signInAnonymously().catch(function(error) {
-     // Handle Errors here.
-     var errorCode = error.code;
-     var errorMessage = error.message;
-     console.log(error.message);
-     // ...
-   });
- });
-
- $('#loginOutBtn').on('click', function() {
-   firebase.auth().signOut();
- });
-
- firebase.auth().onAuthStateChanged(function(user) {
-   console.log(user);
-   if (user) {
-     // User is signed in.
-     var isAnonymous = user.isAnonymous;
-     var uid = user.uid;
-     // ...
-   } else {
-     // User is signed out.
-     // ...
-   }
-   // ...
- });
