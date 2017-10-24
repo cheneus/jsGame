@@ -32,11 +32,11 @@
      if (snapshot.child("player1/id").val() == "" && snapshot.child("player1/id").val() != username) {
        console.log("you are player 1");
        playerNo = "player1"
-       return database.ref("player/player1").set({ id: username, displayName: yourDisplayName, choice:"" })
+       return database.ref("player/player1").set({ id: username, displayName: yourDisplayName, choice:"" });
      } else if (snapshot.child("player2/id").val() == "" && snapshot.child("player2/id").val() != username) {
        console.log("you are player 2");
        playerNo = "player2"
-       return database.ref("player/player2").set({ id: username, displayName: yourDisplayName, choice:"" })
+       return database.ref("player/player2").set({ id: username, displayName: yourDisplayName, choice:"" });
      }
    });
  }
