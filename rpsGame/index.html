@@ -23,6 +23,7 @@
           <button id="loginBtn" class="form-control">Login</button>
           <button id="loginOutBtn" class="form-control">Login Out</button>
         </div>
+        <!--End of row for the login sesssion-->
         <div class="row text-center p-3">
           <div id="user profile">
             <label class="form-control">Your Name : <span id="yourName"></span>
@@ -36,29 +37,45 @@
             <label class="form-control">Anonymous? : <span id="anonymousState2"></span>
             </label>
           </div>
-          <button id="cID">check for user</button>
-        </div>
-      </div>
-    <!--End of row for the login sesssion-->
-    <div class="col-md-6 p-3">
-      <div class="row">
-        <h2 class="m-2 p-2">Talk Away!!</h2>
-        <div class="chatBox">
-          <div id="chatOutput">
+          <div>
+            <button id="cID">check for user</button>
           </div>
         </div>
-        <!--           <div class="row"> -->
-        <input id="text" type="text" placeholder="Message" class="form-control form-inline">
-        <button id="postBtn" class="btn btn-primary form-control form-inline">Post</button>
-        <!-- </div> -->
+        <!-- end of user info -->
+        <div class="row p-3">
+          <h3>Pick your POISON!</h3>
+          <!-- <form class="p-2"> -->
+            <label class="btn btn-primary btn-group" id="poisonA">
+              <input class=form-control type="radio" name="yourPoison" data-rps="s">Poison with a taste note: Absurbly Sharp and Sour
+            </label>
+            <label class="btn btn-primary btn-group" id="poisonB">
+              <input class="form-control" type="radio" name="yourPoison" data-rps="r">Poison with a taste note: Absurbly Blunt and Rough
+            </label>
+            <label class="btn btn-primary btn-group" id="poisonC">
+              <input class="form-control" type="radio" name="yourPoison" data-rps="p">Poison with a taste note: Grasping for more
+            </label>
+          <!-- </form> -->
+        </div>
       </div>
+      <div class="col-md-6 p-3">
+        <div class="row">
+          <h2 class="m-2 p-2">Talk Away!!</h2>
+          <div class="chatBox">
+            <div id="chatOutput">
+            </div>
+          </div>
+          <!--           <div class="row"> -->
+          <input id="text" type="text" placeholder="Message" class="form-control form-inline">
+          <button id="postBtn" class="btn btn-primary form-control form-inline">Post</button>
+          <!-- </div> -->
+        </div>
+      </div>
+      <!--chat log-->
     </div>
-    <!--chat log-->
-  </div>
-  <!--Text Area.-->
-  <script src="assets/js/index.js"></script>
-  <script src="assets/js/auth.js"></script>
-  <script src="assets/js/game.js"></script>
+    <!--Text Area.-->
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/game.js"></script>
 </body>
 
 </html>

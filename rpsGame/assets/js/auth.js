@@ -24,6 +24,7 @@
    $('#chatOutput').append("<div><b>" + $('#yourName').text() + "</b> Has Signed Out...!</div");
    database.ref("player").on('value', function(snapshot) {
      if (snapshot.child("player1/id").val() == username) {
+     database.ref("player/player1").remove();
        database.ref("player/player1").update({ id: "", displayName: "" })
      } else if (snapshot.child("player2/id").val() == username) {
        console.log("player1 is added ad");
