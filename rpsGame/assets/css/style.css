@@ -2,6 +2,10 @@ body {
   font-family: 'HelveticaNeue-Light';
 }
 
+label input[type=radio] {
+    opacity: 0;
+}
+
 .msg {
   margin: 10px 0;
   padding: 10px;

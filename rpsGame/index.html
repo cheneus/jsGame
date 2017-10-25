@@ -25,36 +25,44 @@
         </div>
         <!--End of row for the login sesssion-->
         <div class="row text-center p-3">
-          <div id="user profile">
+          <div id="yourProfile" class="col-md-6">
             <label class="form-control">Your Name : <span id="yourName"></span>
             </label>
             <label class="form-control">Anonymous? : <span id="anonymousState1"></span>
             </label>
           </div>
-          <div id="user profile">
+         <!--  <div id="OpoProfile" class="col-md-6">
             <label class="form-control">Your Opponent : <span id="opoName"></span>
             </label>
             <label class="form-control">Anonymous? : <span id="anonymousState2"></span>
             </label>
-          </div>
-          <div>
+          </div> -->
+          <div id="messageOutput">
             <button id="cID">check for user</button>
           </div>
         </div>
         <!-- end of user info -->
         <div class="row p-3">
-          <h3>Pick your POISON!</h3>
-          <!-- <form class="p-2"> -->
-            <label class="btn btn-primary btn-group" id="poisonA">
-              <input class=form-control type="radio" name="yourPoison" data-rps="s">Poison with a taste note: Absurbly Sharp and Sour
-            </label>
-            <label class="btn btn-primary btn-group" id="poisonB">
-              <input class="form-control" type="radio" name="yourPoison" data-rps="r">Poison with a taste note: Absurbly Blunt and Rough
-            </label>
-            <label class="btn btn-primary btn-group" id="poisonC">
-              <input class="form-control" type="radio" name="yourPoison" data-rps="p">Poison with a taste note: Grasping for more
-            </label>
-          <!-- </form> -->
+          <div class="row">
+            <div class="col-lg-4">
+              <h4>Pick your POISON!</h4>
+              <!-- <form class="p-2"> -->
+              <label class="btn btn-primary btn-group" id="poisonA">
+                <input class=form-control type="radio" name="yourPoison" data-rps="s">Taste note: Absurbly Sharp and Sour
+              </label>
+              <label class="btn btn-primary btn-group" id="poisonB">
+                <input class="form-control" type="radio" name="yourPoison" data-rps="r">Taste note: Absurbly Blunt and Rough
+              </label>
+              <label class="btn btn-primary btn-group" id="poisonC">
+                <input class="form-control" type="radio" name="yourPoison" data-rps="p">Taste note: Grasping for more
+              </label>
+              <!-- </form> -->
+            </div>
+            <div class="col-lg-7">
+              <h4>Your Choice</h4>
+              <span id="choiceChoosen"></span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-md-6 p-3">
