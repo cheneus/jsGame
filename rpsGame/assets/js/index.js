@@ -1,50 +1,39 @@
   var database = firebase.database();
-$(function() {
-  // var usernameInput = $('#username');
-  var textInput = $('#text');
+  $(function() {
+    // var usernameInput = $('#username');
+    var textInput = $('#text');
 
-  var username = '';
-  var yourDisplayName = '';
-  var playerNo = '';
-  const playerRef = database.ref("player");
+    var username = "";
+    var yourDisplayName = "";
+    var playerNo = "";
+    const playerRef = database.ref("player");
 
-  var checkId = function() {
-    database.ref("player").on('value', function(snapshot) {
-      console.log(snapshot.val());
-      console.log(snapshot.numChildren())
-      console.log(snapshot.length);
+    var checkId = function() {
+      database.ref("player").on('value', function(snapshot) {
+        console.log(snapshot.val());
+        console.log(snapshot.numChildren())
+        console.log(snapshot.length);
 
-      // var msgUsernameElement = document.createElement("b");
-      // msgUsernameElement.textContent = msg.username;
-      // $('#chatOutput').append("<div><b>"+msg.username+"</b><p>"+msg.text+"</p></div");
-    });
-  }
-  // checkId();
-
-  $('#cID').on('click', startGame);
-
-  function startGame() {
-    database.ref("player/player1").set({ id: "", displayName: "" });
-    database.ref("player/player2").set({ id: "", displayName: "" });
-    database.ref("session").set({ turn: 0 });
-  }
-
-  database.ref(".info/connected").on("value", function(snap) {
-    if (snap.val() === true) {
-      console.log(true);
-    } else {
-      console.log(false)
+        // var msgUsernameElement = document.createElement("b");
+        // msgUsernameElement.textContent = msg.username;
+        // $('#chatOutput').append("<div><b>"+msg.username+"</b><p>"+msg.text+"</p></div");
+      });
     }
-  })
+    // checkId();
 
+    $('#cID').on('click', startGame);
 
-
-  var setup = {
-    start :function() {
-      $('input[type="radio"]').on('click', gameLogic.selection)
-      $('#gameSec').hide();
+    function startGame() {
+      database.ref("player/player1").set({ id: "", displayName: "" });
+      database.ref("player/player2").set({ id: "", displayName: "" });
+      database.ref("session").set({ turn: 0 });
     }
-  }
-  // Begin listening for data
-});
 
+    database.ref(".info/connected").on("value", function(snap) {
+      if (snap.val() === true) {
+        console.log("true" + " connected");
+      } else {
+        console.log(false)
+      }
+    })
+  });

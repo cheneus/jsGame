@@ -2,10 +2,10 @@ $(function() {
   $('#postBtn').on("click", function() {
     console.log("working");
     var msgUser = yourDisplayName;
-    var msgText = textInput.val();
+    var msgText = $('#text').val();
     console.log(msgUser + msgText);
     database.ref("chat").push({ username: msgUser, text: msgText });
-    textInput.value = "";
+    $('#text').value = "";
   });
 
   var startListening = function() {

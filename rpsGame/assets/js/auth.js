@@ -4,10 +4,29 @@ $(function() {
   var user = firebase.auth().currentUser;
   var credential;
 
-  // Prompt the user to re-provide their sign-in credentials
+  var setup = {
+    gameState: function() {
+      database.ref("player").once('value', function(snapshot) {
+        if (snapshot.child("player1/id").val() == "" && snapshot.child("player2/id").val() == "") {
+          setup.login()
+        } else {
+          $('#loginSec').text("THE GAME IS FULL NOW");
+          $('#gameSec').hide();
+        }
+      })
+    },
+    login: function() {
+      $('#loginSec').show();
+      $('#gameSec').hide();
+      // $('#loginOutBtn').hide();
+    },
 
-
-
+    game: function() {
+      $('#loginSec').hide();
+      $('#gameSec').show();
+    }
+  }
+  setup.gameState();
 
   function randomNum() {
     return Math.floor(Math.random() * displayNameArr.length);
@@ -31,10 +50,19 @@ $(function() {
     });
   }
 
-  $('#loginBtn').on('click', function() {
+  const message = {
+    logIn: "has join the game",
+    logOut: "has left the game"
+  }
+
+
+  function loginRandom() {
     firebase.auth().signInAnonymously()
-      .then(function() {
-        console.log("login on d fly")
+      .then(function(user) {
+        console.log("just login");
+        setup.game();
+        database.ref("chat").push({ username: yourDisplayName, text: message.logIn });
+
       })
 
       .catch(function(error) {
@@ -48,16 +76,17 @@ $(function() {
     // .then(function(user) {
     //   username = user.uid;
     // })
-  });
+  };
 
-  $('#loginOutBtn').on('click', function() {
-    var logOutText = "has signed out..!";
+  $('#loginOutBtn').on('click', logOut);
+
+  function logOut() {
     database.ref("player/" + playerNo).set({ id: "" });
     firebase.auth().signOut()
       .then(function() {
         console.log("signed-out")
-
-        database.ref("chat").push({ username: yourDisplayName, text: logOutText });
+        setup.login();
+        database.ref("chat").push({ username: yourDisplayName, text: message.logOut });
 
         // }).then(function() {
         //   user.reauthenticateWithCredential(credential).then(function() {
@@ -71,7 +100,7 @@ $(function() {
       });
     // });
 
-  });
+  };
 
   firebase.auth().onAuthStateChanged(function(user) {
 
@@ -79,26 +108,34 @@ $(function() {
     if (user) {
       // User is signed in.
       console.log("signed in")
-      // var displayName = user.displayName;
+
       var isAnonymous = user.isAnonymous;
       username = user.uid
-
-      if (isAnonymous == true) {
-        // var tempName = displayNameArr[randomNum()];
-        yourDisplayName = $('#displayNameTemp').val();
-        // $('#yourName').text(displayNameArr[randomNum()]);
-        console.log(user);
+      setup.game();
+      if (user.displayName == null) {
+        user.updateProfile({
+          displayName: yourDisplayName
+        })
       }
-      checkPlayers();
-      $('#yourName').text(yourDisplayName);
+      var userDisplayName = user.displayName;
+      $('#yourName').text(userDisplayName);
       $('#anonymousState1').text(isAnonymous);
+      // var tempName = displayNameArr[randomNum()];
+      // $('#yourName').text(displayNameArr[randomNum()]);
+      console.log(user)
+      checkPlayers();
       // ...
 
     } else {
       // User is signed out.
+
       console.log("signed out")
       // ...
     }
     // ...
+  });
+  $('#loginBtn').on('click', function() {
+    yourDisplayName = $('#displayNameTemp').val();
+    loginRandom();
   });
 });

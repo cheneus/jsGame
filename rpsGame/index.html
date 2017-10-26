@@ -15,92 +15,91 @@
 
 <body>
   <div class="container">
-    <div class="row p-3">
+    <div class="row p-3" id="loginSec">
       <h2 class="m-2 p-2">The Login</h2>
       <input type="text" name="displayNameTemp" id="displayNameTemp" class="form-control">
       <button id="loginBtn" class="form-control">Login</button>
-      <button id="loginOutBtn" class="form-control">Login Out</button>
+      <!-- <button id="loginOutBtn" class="form-control">Login Out</button> -->
     </div>
     <!--End of row for the login sesssion-->
     <div class="col-md-12">
-      <div id="gameSec">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="row text-center p-3">
-              <h2 class="m-2 p-2">The Login</h2>
-              <div id="yourProfile" class="col-md-12">
-                <label class="form-control">Your Name : <span id="yourName"></span>
-                </label>
-                <label class="form-control">Anonymous? : <span id="anonymousState1"></span>
-                </label>
-              </div>
-              <!--  <div id="OpoProfile" class="col-md-6">
+      <div class="row" id="gameSec">
+        <div class="col-md-6">
+          <div class="row text-center p-3">
+            <h2 class="m-2 p-2">The Login</h2>
+            <div id="yourProfile" class="col-md-12">
+              <label class="form-control">Your Name : <span id="yourName"></span>
+              </label>
+              <label class="form-control">Anonymous? : <span id="anonymousState1"></span>
+              </label>
+              <button id="loginOutBtn" class="form-control">Login Out</button>
+            </div>
+          <!--    <div id="OpoProfile" class="col-md-6">
             <label class="form-control">Your Opponent : <span id="opoName"></span>
             </label>
             <label class="form-control">Anonymous? : <span id="anonymousState2"></span>
             </label>
           </div> -->
-              <div id="messageOutput">
-                <button id="cID">check for user</button>
-              </div>
+            <div id="messageOutput">
+              <!-- <button id="cID">clear user</button> -->
             </div>
-            <!-- end of user info -->
-            <div class="row p-3">
-              <div class="col-lg-6">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>Pick your POISON!</h4>
-                  </div>
-                  <!-- <form class="p-2"> -->
-                  <div class="card-text  p-2">
-                    <label class="btn btn-primary btn-group" id="poisonA">
-                      <input class=form-control type="radio" name="yourPoison" data-rps="s">Sharp and Sour
-                    </label>
-                    <label class="btn btn-primary btn-group" id="poisonB">
-                      <input class="form-control" type="radio" name="yourPoison" data-rps="r">Blunt and Rough
-                    </label>
-                    <label class="btn btn-primary btn-group" id="poisonC">
-                      <input class="form-control" type="radio" name="yourPoison" data-rps="p"> White Crumbs
-                    </label>
-                  </div>
+          </div>
+          <!-- end of user info -->
+          <div class="row p-3">
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Pick your POISON!</h4>
                 </div>
-                <!-- </form> -->
+                <!-- <form class="p-2"> -->
+                <div class="card-text  p-2">
+                  <label class="btn btn-primary btn-group" id="poisonA">
+                    <input class=form-control type="radio" name="yourPoison" data-rps="s">Sharp and Sour
+                  </label>
+                  <label class="btn btn-primary btn-group" id="poisonB">
+                    <input class="form-control" type="radio" name="yourPoison" data-rps="r">Blunt and Rough
+                  </label>
+                  <label class="btn btn-primary btn-group" id="poisonC">
+                    <input class="form-control" type="radio" name="yourPoison" data-rps="p"> White Crumbs
+                  </label>
+                </div>
               </div>
-              <div class="col-lg-6 my-2 my-lg-0">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>Your Choice</h4>
-                  </div>
-                  <div class="card-text p-2">
-                    <span id="choiceChoosen">Let it FLOW!</span>
-                  </div>
+              <!-- </form> -->
+            </div>
+            <div class="col-lg-6 my-2 my-lg-0">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Your Choice</h4>
+                </div>
+                <div class="card-text p-2">
+                  <span id="choiceChoosen">Let it FLOW!</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6 p-3">
-            <div class="row">
-              <h2 class="m-2 p-2">Talk Away!!</h2>
-              <div class="chatBox p-3">
-                <div id="chatOutput">
-                </div>
-              </div>
-              <!--           <div class="row"> -->
-              <input id="text" type="text" placeholder="Message" class="form-control form-inline">
-              <button id="postBtn" class="btn btn-primary form-control form-inline">Post</button>
-              <!-- </div> -->
-            </div>
-          </div>
-          <!--chat log-->
         </div>
+        <div class="col-md-6 p-3">
+          <div class="row">
+            <h2 class="m-2 p-2">Talk Away!!</h2>
+            <div class="chatBox p-3">
+              <div id="chatOutput">
+              </div>
+            </div>
+            <!--           <div class="row"> -->
+            <input id="text" type="text" placeholder="Message" class="form-control form-inline">
+            <button id="postBtn" class="btn btn-primary form-control form-inline">Post</button>
+            <!-- </div> -->
+          </div>
+        </div>
+        <!--chat log-->
       </div>
     </div>
   </div>
-    <!--Text Area.-->
-    <script src="assets/js/index.js"></script>
-    <script src="assets/js/chat.js"></script>
-    <script src="assets/js/auth.js"></script>
-    <script src="assets/js/game.js"></script>
+  <!--Text Area.-->
+  <script src="assets/js/index.js"></script>
+  <script src="assets/js/chat.js"></script>
+  <script src="assets/js/game.js"></script>
+  <script src="assets/js/auth.js"></script>
 </body>
 
 </html>
