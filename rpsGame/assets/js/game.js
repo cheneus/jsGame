@@ -54,11 +54,11 @@ $(function() {
 
         })
         // .then(function() {
-          // database.ref("session").update({ turn: turn + 1 });
-          // // gameLogic.result();
-          // if (turn == 2) {
-          //   gameLogic.showDown();
-          // }
+        // database.ref("session").update({ turn: turn + 1 });
+        // // gameLogic.result();
+        // if (turn == 2) {
+        //   gameLogic.showDown();
+        // }
 
         // })
         .catch(function(error) {
@@ -78,11 +78,11 @@ $(function() {
     turn = snapshot.val();
   })
 
-     database.ref("player").on("value", function(snapshot) {
-      if (snapshot.child("player1/choice").val() != "" && snapshot.child("player1/choice").val() != "") {
-        gameLogic.showDown();
-      }
-     })
+  database.ref("player").once("child_changed", function(snapshot) {
+    if (snapshot.child("player1/choice").val() != null && snapshot.child("player1/choice").val() != null) {
+      gameLogic.showDown();
+    }
+  })
 
   // database.ref("player").on('child_changed', function(snapshot) {
   //   if (username != snapshot.child("player1/id").val()) {

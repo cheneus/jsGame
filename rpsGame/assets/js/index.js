@@ -35,5 +35,10 @@
       } else {
         console.log(false)
       }
-    })
+    });
+
+
   });
+  window.onbeforeunload = function() {
+    logOut();
+  }

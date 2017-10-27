@@ -1,13 +1,13 @@
 $(function() {
   const displayNameArr = ["SuperMonkey", "PikaPower", "RollWithEggRoll", "SuperFish", "TheGreatEscape"];
-  // const user = firebase.auth().currentUser;
-  var user = firebase.auth().currentUser;
+  const user = firebase.auth().currentUser;
+  // var user = firebase.auth().currentUser;
   var credential;
 
   var setup = {
     gameState: function() {
       database.ref("player").once('value', function(snapshot) {
-        if (snapshot.child("player1/id").val() == "" && snapshot.child("player2/id").val() == "") {
+        if (snapshot.child("player1/id").val() == "" || snapshot.child("player2/id").val() == "") {
           setup.login()
         } else {
           $('#loginSec').text("THE GAME IS FULL NOW");
@@ -22,8 +22,12 @@ $(function() {
     },
 
     game: function() {
+
+      // const user = firebase.auth().currentUser;
       $('#loginSec').hide();
+      $('#yourName').text(yourDisplayName);
       $('#gameSec').show();
+      // $('#anonymousState1').text(user.isAnonymous);
     }
   }
   setup.gameState();
@@ -38,14 +42,20 @@ $(function() {
       //   console.log("we already have 2 players");
       //   return $("#cID").append('Some text');
       // }
-      if (snapshot.child("player1/id").val() == "" && snapshot.child("player1/id").val() != username) {
-        console.log("you are player 1");
-        playerNo = "player1";
-        return database.ref("player/player1").set({ id: username, displayName: yourDisplayName, choice: "" });
-      } else if (snapshot.child("player2/id").val() == "" && snapshot.child("player2/id").val() != username) {
-        console.log("you are player 2");
-        playerNo = "player2";
-        return database.ref("player/player2").set({ id: username, displayName: yourDisplayName, choice: "" });
+      if (snapshot.child("player1/id").val() == "") {
+        // if (snapshot.child("player2/id").val() != snapshot.child("player1/id").val()) {
+        if (snapshot.child("player2/id").val() != username) {
+          console.log("you are player 1");
+          playerNo = "player1";
+          return database.ref("player/player1").set({ id: username, displayName: yourDisplayName, choice: "" });
+        }
+      } else if (snapshot.child("player2/id").val() == "") {
+        // if (snapshot.child("player2/id").val() != snapshot.child("player1/id").val()) {
+        if (snapshot.child("player2/id").val() != username) {
+          console.log("you are player 2");
+          playerNo = "player2";
+          return database.ref("player/player2").set({ id: username, displayName: yourDisplayName, choice: "" });
+        }
       }
     });
   }
@@ -106,24 +116,23 @@ $(function() {
 
     console.log(user);
     if (user) {
+      // setup.gameState();
       // User is signed in.
       console.log("signed in")
-
       var isAnonymous = user.isAnonymous;
       username = user.uid
-      setup.game();
+      yourDisplayName = $('#displayNameTemp').val();
       if (user.displayName == null) {
         user.updateProfile({
           displayName: yourDisplayName
         })
       }
-      var userDisplayName = user.displayName;
-      $('#yourName').text(userDisplayName);
-      $('#anonymousState1').text(isAnonymous);
+      setup.game();
       // var tempName = displayNameArr[randomNum()];
       // $('#yourName').text(displayNameArr[randomNum()]);
       console.log(user)
       checkPlayers();
+      // $('#yourName').text(tempName);
       // ...
 
     } else {
@@ -132,10 +141,13 @@ $(function() {
       console.log("signed out")
       // ...
     }
-    // ...
+    // $('#yourName').text(user.displayName);
+    // $('#anonymousState1').text(user.isAnonymous);
   });
   $('#loginBtn').on('click', function() {
     yourDisplayName = $('#displayNameTemp').val();
     loginRandom();
+    // var userDisplayName = user.displayName;
+
   });
 });
