@@ -7,7 +7,7 @@ $(function() {
   var setup = {
     gameState: function() {
       database.ref("player").once('value', function(snapshot) {
-        if (snapshot.child("player1/id").val() == "" || snapshot.child("player2/id").val() == "") {
+        if (snapshot.child("p1/id").val() == "" || snapshot.child("p2/id").val() == "") {
           setup.login()
         } else {
           $('#loginSec').text("THE GAME IS FULL NOW");
@@ -22,13 +22,20 @@ $(function() {
     },
 
     game: function() {
-
       // const user = firebase.auth().currentUser;
       $('#loginSec').hide();
       $('#yourName').text(yourDisplayName);
       $('#gameSec').show();
 
       // $('#anonymousState1').text(user.isAnonymous);
+    },
+    clearPly: function() {
+      if (playerNo == p1) {
+        p1win = p1lose = p1draw = 0;
+      }
+      if (playerNo == p2) {
+        p2win = p2lose = p2draw = 0;
+      }
     }
   }
   setup.gameState();
@@ -39,23 +46,23 @@ $(function() {
 
   function checkPlayers() {
     database.ref("player").once('value', function(snapshot) {
-      // if (snapshot.child("player1/id").val() !== "" && snapshot.child("player2/id").val() !== "") {
+      // if (snapshot.child("p1/id").val() !== "" && snapshot.child("p2/id").val() !== "") {
       //   console.log("we already have 2 players");
       //   return $("#cID").append('Some text');
       // }
-      if (snapshot.child("player1/id").val() == "") {
-        // if (snapshot.child("player2/id").val() != snapshot.child("player1/id").val()) {
-        if (snapshot.child("player2/id").val() != username) {
+      if (snapshot.child("p1/id").val() == "") {
+        // if (snapshot.child("p2/id").val() != snapshot.child("p1/id").val()) {
+        if (snapshot.child("p2/id").val() != username) {
           console.log("you are player 1");
-          playerNo = "player1";
-          return database.ref("player/player1").set({ id: username, displayName: yourDisplayName, choice: "", win: 0, lose: 0, draw: 0 });
+          playerNo = "p1";
+          return database.ref("player/p1").set({ id: username, displayName: yourDisplayName, choice: "", win: 0, lose: 0, status: "" });
         }
-      } else if (snapshot.child("player2/id").val() == "") {
-        // if (snapshot.child("player2/id").val() != snapshot.child("player1/id").val()) {
-        if (snapshot.child("player2/id").val() != username) {
+      } else if (snapshot.child("p2/id").val() == "") {
+        // if (snapshot.child("p2/id").val() != snapshot.child("p1/id").val()) {
+        if (snapshot.child("p2/id").val() != username) {
           console.log("you are player 2");
-          playerNo = "player2";
-          return database.ref("player/player2").set({ id: username, displayName: yourDisplayName, choice: "", win: 0, lose: 0, draw: 0 });
+          playerNo = "p2";
+          return database.ref("player/p2").set({ id: username, displayName: yourDisplayName, choice: "", win: 0, lose: 0, status: "" });
         }
       }
     });
@@ -89,7 +96,7 @@ $(function() {
     // })
   };
 
-  $('#loginOutBtn').on('click', logOut);
+
 
   function logOut() {
     database.ref("player/" + playerNo).set({ id: "" });
@@ -97,8 +104,10 @@ $(function() {
       .then(function() {
         console.log("signed-out")
         setup.login();
-        database.ref("chat").push({ username: yourDisplayName, text: message.logOut });
+        setup.clearPly();
         $('#displayNameTemp').val("");
+        database.ref("chat").push({ username: yourDisplayName, text: message.logOut });
+
         // }).then(function() {
         //   user.reauthenticateWithCredential(credential).then(function() {
         //     // User re-authenticated.
@@ -151,4 +160,5 @@ $(function() {
     // var userDisplayName = user.displayName;
 
   });
+  $('#loginOutBtn').on('click', logOut);
 });

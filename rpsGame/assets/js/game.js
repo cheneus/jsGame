@@ -1,37 +1,42 @@
 $(function() {
+  let message = "";
   var turn;
-  var win = 0, lose = 0, draw = 0;
+
+
   var gameLogic = {
-    message: {
-      win: "You win",
-      draw: "You cancel out each other",
-      lose: "You lose! NOW feel the pain"
-    },
+
+    p1win: 0,
+    p1lose: 0,
+
+    p2win: 0,
+    p2lose: 0,
 
     win: function() {
-      $('#messageOutput').text(gameLogic.message.win);
-      win++
-        $('#win').text(win);
+      gameLogic.p1win += 1;
+      gameLogic.p2lose += 1;
+      database.ref("player/p2").update({ status: "You lose! NOW feel the pain" });
+      database.ref("player/p1").update({ status: "You win" });
     },
 
     lose: function() {
-      $('#messageOutput').text(gameLogic.message.lose);
-      lose++
-        $('#lose').text(lose);
+      gameLogic.p2win += 1;
+      gameLogic.p1lose += 1;
+      database.ref("player/p1").update({ status: "You lose! NOW feel the pain" });
+      database.ref("player/p2").update({ status: "You win" });
     },
 
-    draw: function() {
-      $('#messageOutput').text(gameLogic.message.draw);
-      draw ++
-        $('#draw').text(draw);
-    },
+    feedbackUpdate: function() {
+      database.ref("player/p1").update({ win: gameLogic.p1win, lose: gameLogic.p1lose });
+      database.ref("player/p2").update({ win: gameLogic.p2win, lose: gameLogic.p2lose });
 
+
+    },
     showDown: function() {
       let p1Choice, p2Choice;
-      database.ref("player").on("value", function(snapshot) {
+      database.ref("player").once("value", function(snapshot) {
         // yourChoice = snapshot.child("choice").val();
-        p1Choice = snapshot.child("player1/choice").val();
-        p2Choice = snapshot.child("player2/choice").val();
+        p1Choice = snapshot.child("p1/choice").val();
+        p2Choice = snapshot.child("p2/choice").val();
         console.log(p1Choice)
         console.log(p2Choice)
       })
@@ -56,19 +61,20 @@ $(function() {
         }
         // console.log("p1 WINS");
       }
-      if (p1Choice === p2Choice) {
-        console.log("DRAW")
-        gameLogic.draw();
-      }
       // database.ref('session').set({ turn: 0 });
       // })
-
+      console.log(gameLogic.p1win);
+      console.log(gameLogic.p2win);
+      gameLogic.feedbackUpdate();
+      database.ref("player/p2").update({ choice: "" });
+      database.ref("player/p1").update({ choice: "" });
+      database.ref("session").update({ turn: 1 });
     },
 
     selection: function() {
-      var selected = $('input[name="yourPoison"]:checked').data('rps');
+      let selected = $('input[name="yourPoison"]:checked').data('rps');
       var yourChoice;
-      $('input[type="radio"]').off('click')
+      // $('input[type="radio"]').off('click')
       // database.ref("player/" + playerNo).update({ choice: selection });
       // $('#choiceChoosen').text(selected.toUpperCase());
       $('#choiceChoosen').empty();
@@ -79,46 +85,36 @@ $(function() {
 
         })
         // .then(function() {
-        // database.ref("session").update({ turn: turn + 1 });
-        // // gameLogic.result();
-        // if (turn == 2) {
-        //   gameLogic.showDown();
-        // }
 
-        // })
         .catch(function(error) {
           console.log(error)
         })
+      // database.ref("player").once("value", function(snapshot) {
+        database.ref("player").once("value")
+        .then( function(snapshot) {
+        if (snapshot.child("p1/choice").val() != "" && snapshot.child("p2/choice").val() != "") {
+          gameLogic.showDown();
 
-
-
-      // database.ref("player").on("value", function(snapshot) {
-      //   // yourChoice = snapshot.child.val();
+        }
+      })
       // })
-      // console.log(yourChoice);
+
     }
   }
 
-  // database.ref("session/turn").on("value", function(snapshot) {
-  //   turn = snapshot.val();
-  // })
-
-  database.ref("player").on("value", function(snapshot) {
-    if (snapshot.child("player1/choice").val() != null && snapshot.child("player2/choice").val() != null) {
-      gameLogic.showDown();
+  database.ref("session").on("value", function(snapshot) {
+    if (snapshot.child('turn').val() == 1) {
+      database.ref("player/" + playerNo).on("value", function(snapshot) {
+        message = snapshot.child("status").val();
+        win = snapshot.child("win").val();
+        lose = snapshot.child("lose").val();
+        $('#messageOutput').text(message);
+        $('#win').text(win);
+        $('#lose').text(lose);
+      })
+      database.ref("session").update({ turn: 0 });
     }
   })
 
-  // database.ref("player").on('child_changed', function(snapshot) {
-  //   if (username != snapshot.child("player1/id").val()) {
-  //     $('#opoName').text(snapshot.child("player1/displayName").val())
-  //     // always true due to there is no other way for your to auth
-  //     $('#anonymousState2').text("true");
-  //   }
-  //   if (username != snapshot.child("player2/id").val()) {
-  //     $('#opoName').text(snapshot.child("player2/displayName").val())
-  //     $('#anonymousState2').text("true");
-  //   }
-  // })
   $('input[type="radio"]').on('click', gameLogic.selection)
 });

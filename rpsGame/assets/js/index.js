@@ -24,8 +24,8 @@
     $('#cID').on('click', startGame);
 
     function startGame() {
-      database.ref("player/player1").set({ id: "", displayName: "" });
-      database.ref("player/player2").set({ id: "", displayName: "" });
+      database.ref("player/p1").set({ id: "", displayName: "" });
+      database.ref("player/p2").set({ id: "", displayName: "" });
       database.ref("session").set({ turn: 0 });
     }
 
@@ -37,8 +37,15 @@
       }
     });
 
+    window.onload = function() {
+    
+    return startGame();
+  }
+
+  window.onbeforeunload = function() {
+
+    return logOut();
+  }
 
   });
-  window.onbeforeunload = function() {
-    logOut();
-  }
+ 
