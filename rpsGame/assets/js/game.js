@@ -1,12 +1,29 @@
 $(function() {
   var turn;
+  var win = 0, lose = 0, draw = 0;
   var gameLogic = {
-    win: 0,
-    lose: 0,
     message: {
-      win: "Your poison win",
-      draw: "The poison cancel out each other",
+      win: "You win",
+      draw: "You cancel out each other",
       lose: "You lose! NOW feel the pain"
+    },
+
+    win: function() {
+      $('#messageOutput').text(gameLogic.message.win);
+      win++
+        $('#win').text(win);
+    },
+
+    lose: function() {
+      $('#messageOutput').text(gameLogic.message.lose);
+      lose++
+        $('#lose').text(lose);
+    },
+
+    draw: function() {
+      $('#messageOutput').text(gameLogic.message.draw);
+      draw ++
+        $('#draw').text(draw);
     },
 
     showDown: function() {
@@ -21,34 +38,42 @@ $(function() {
       // .then(function() {
       if (p1Choice == "p") {
         if (p2Choice == "r") {
-          console.log("p1 WINS");
+          console.log("you win");
+          gameLogic.win();
         } else if (p2Choice == "s") {
-          console.log("p2 WINS");
+          console.log("you lose");
+          gameLogic.lose();
         }
         // console.log("p1 WINS");
       }
       if (p1Choice == "s") {
         if (p2Choice == "r") {
-          console.log("p1 WINS");
+          console.log("you win");
+          gameLogic.win();
         } else if (p2Choice == "p") {
-          console.log("p2 WINS");
+          console.log("you lose");
+          gameLogic.lose();
         }
         // console.log("p1 WINS");
       }
       if (p1Choice === p2Choice) {
         console.log("DRAW")
+        gameLogic.draw();
       }
-      $('#input[name="yourPoison"]').prop("disabled", false);
-      database.ref('session').set({ turn: 0 });
+      // database.ref('session').set({ turn: 0 });
       // })
+
     },
 
     selection: function() {
       var selected = $('input[name="yourPoison"]:checked').data('rps');
       var yourChoice;
-      $('#input[name="yourPoison"]').prop("disabled", true);
+      $('input[type="radio"]').off('click')
       // database.ref("player/" + playerNo).update({ choice: selection });
-
+      // $('#choiceChoosen').text(selected.toUpperCase());
+      $('#choiceChoosen').empty();
+      $(this).clone().appendTo('#choiceChoosen');
+      $('#choiceChoosen').append($('#poison' + selected.toUpperCase()).text());
       database.ref("player/" + playerNo).once("value", function() {
           database.ref("player/" + playerNo).update({ choice: selected });
 
@@ -74,12 +99,12 @@ $(function() {
     }
   }
 
-  database.ref("session/turn").on("value", function(snapshot) {
-    turn = snapshot.val();
-  })
+  // database.ref("session/turn").on("value", function(snapshot) {
+  //   turn = snapshot.val();
+  // })
 
-  database.ref("player").once("child_changed", function(snapshot) {
-    if (snapshot.child("player1/choice").val() != null && snapshot.child("player1/choice").val() != null) {
+  database.ref("player").on("value", function(snapshot) {
+    if (snapshot.child("player1/choice").val() != null && snapshot.child("player2/choice").val() != null) {
       gameLogic.showDown();
     }
   })

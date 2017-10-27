@@ -27,21 +27,42 @@
         <div class="col-md-6">
           <div class="row text-center p-3">
             <h2 class="m-2 p-2">Your Info</h2>
-            <div id="yourProfile" class="col-md-12">
+            <div id="yourProfile" class="col-lg-12">
               <label class="form-control">Your Name : <span id="yourName"></span>
               </label>
-              <label class="form-control">Anonymous? : <span id="anonymousState1"></span>
-              </label>
-              <button id="loginOutBtn" class="form-control">Login Out</button>
+             <!--  <label class="form-control">Anonymous? : <span id="anonymousState1"></span>
+              </label> -->
+              <div class="row" id="playerStat">
+                <div class="col-lg-4">
+                  <label class="form-control" id="winLbl">Win : <span id="win">0</span>
+                  </label>
+                </div>
+                <div class="col-lg-4">
+                  <label class="form-control" id="loseLbl">Lose : <span id="lose">0</span>
+                  </label>
+                </div>
+                <div class="col-lg-4">
+                  <label class="form-control" id="drawLbl">Draw : <span id="draw">0</span>
+                  </label>
+                </div>
+              </div>
+              <button id="loginOutBtn" class="form-control bg-danger">Login Out</button>
             </div>
-          <!--    <div id="OpoProfile" class="col-md-6">
+            <!--    <div id="OpoProfile" class="col-md-6">
             <label class="form-control">Your Opponent : <span id="opoName"></span>
             </label>
             <label class="form-control">Anonymous? : <span id="anonymousState2"></span>
             </label>
           </div> -->
-            <div id="messageOutput">
-              <!-- <button id="cID">clear user</button> -->
+            <div class="col-lg-12 my-2 my-lg-0">
+              <div class="card" id="feedback">
+                <div class="card-header">
+                  <h4>Feedback</h4>
+                </div>
+                <div id="messageOutput" class="card-text">
+                  <!-- <button id="cID">clear user</button> -->
+                </div>
+              </div>
             </div>
           </div>
           <!-- end of user info -->
@@ -49,18 +70,18 @@
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-header">
-                  <h4>Pick your POISON!</h4>
+                  <h4>Pick One!</h4>
                 </div>
                 <!-- <form class="p-2"> -->
                 <div class="card-text  p-2">
-                  <label class="btn btn-primary btn-group" id="poisonA">
-                    <input class=form-control type="radio" name="yourPoison" data-rps="s">Sharp and Sour
+                  <label class="btn btn-primary btn-group" id="poisonS">
+                    <input class=form-control type="radio" name="yourPoison" data-rps="s">Sharp and Sour (S)
                   </label>
-                  <label class="btn btn-primary btn-group" id="poisonB">
-                    <input class="form-control" type="radio" name="yourPoison" data-rps="r">Blunt and Rough
+                  <label class="btn btn-primary btn-group" id="poisonR">
+                    <input class="form-control" type="radio" name="yourPoison" data-rps="r">Blunt and Rough (R)
                   </label>
-                  <label class="btn btn-primary btn-group" id="poisonC">
-                    <input class="form-control" type="radio" name="yourPoison" data-rps="p"> White Crumbs
+                  <label class="btn btn-primary btn-group" id="poisonP">
+                    <input class="form-control" type="radio" name="yourPoison" data-rps="p"> White Crumbs (P)
                   </label>
                 </div>
               </div>
@@ -72,14 +93,14 @@
                   <h4>Your Choice</h4>
                 </div>
                 <div class="card-text p-2">
-                  <span id="choiceChoosen">Let it FLOW!</span>
+                  <label id="choiceChoosen" class="btn btn-primary btn-group">Let it FLOW!</label>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-6 p-3">
-          <div class="row">
+          <div class="row px-3">
             <h2 class="m-2 p-2">Talk Away!!</h2>
             <div class="chatBox p-3">
               <div id="chatOutput">

@@ -19,3 +19,10 @@ $(function() {
   }
   startListening();
 });
+
+database.ref("player").on("value", function(snapshot) {
+    if (snapshot.child("player1/id").val() == "" && snapshot.child("player2/id").val() == "") {
+      database.ref("chat").set({});
+    }
+
+  })

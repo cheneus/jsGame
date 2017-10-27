@@ -2,6 +2,8 @@ body {
   font-family: 'HelveticaNeue-Light';
 }
 
+
+
 label input[type=radio] {
     opacity: 0;
 }
@@ -36,4 +38,20 @@ label input[type=radio] {
 
 .poisonA,.poisonB,.poisonC {
   width:100%;
+}
+
+#playerStat div label, #loginOutBtn {
+  color:white;
+}
+
+#playerStat div label[id=winLbl] {
+  background-color:#ff6347;
+}
+
+#playerStat div label[id=loseLbl] {
+    background-color:#3cb371;
+}
+
+#playerStat div label[id=drawLbl] {
+    background-color:#ffa500;
 }

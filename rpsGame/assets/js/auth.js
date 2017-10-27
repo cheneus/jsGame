@@ -27,6 +27,7 @@ $(function() {
       $('#loginSec').hide();
       $('#yourName').text(yourDisplayName);
       $('#gameSec').show();
+
       // $('#anonymousState1').text(user.isAnonymous);
     }
   }
@@ -47,14 +48,14 @@ $(function() {
         if (snapshot.child("player2/id").val() != username) {
           console.log("you are player 1");
           playerNo = "player1";
-          return database.ref("player/player1").set({ id: username, displayName: yourDisplayName, choice: "" });
+          return database.ref("player/player1").set({ id: username, displayName: yourDisplayName, choice: "", win: 0, lose: 0, draw: 0 });
         }
       } else if (snapshot.child("player2/id").val() == "") {
         // if (snapshot.child("player2/id").val() != snapshot.child("player1/id").val()) {
         if (snapshot.child("player2/id").val() != username) {
           console.log("you are player 2");
           playerNo = "player2";
-          return database.ref("player/player2").set({ id: username, displayName: yourDisplayName, choice: "" });
+          return database.ref("player/player2").set({ id: username, displayName: yourDisplayName, choice: "", win: 0, lose: 0, draw: 0 });
         }
       }
     });
@@ -97,7 +98,7 @@ $(function() {
         console.log("signed-out")
         setup.login();
         database.ref("chat").push({ username: yourDisplayName, text: message.logOut });
-
+        $('#displayNameTemp').val("");
         // }).then(function() {
         //   user.reauthenticateWithCredential(credential).then(function() {
         //     // User re-authenticated.
