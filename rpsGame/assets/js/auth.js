@@ -13,7 +13,7 @@ $(function() {
           $('#loginSec').text("THE GAME IS FULL NOW");
           $('#gameSec').hide();
         }
-        else {
+        else if (snapshot.child("p1/id").val() === snapshot.child("p2/id").val()) {
           gameStart()
           game.login()
         }
