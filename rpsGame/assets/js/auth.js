@@ -1,17 +1,21 @@
 $(function() {
-  const displayNameArr = ["SuperMonkey", "PikaPower", "RollWithEggRoll", "SuperFish", "TheGreatEscape"];
+  // const displayNameArr = ["SuperMonkey", "PikaPower", "RollWithEggRoll", "SuperFish", "TheGreatEscape"];
   const user = firebase.auth().currentUser;
   // var user = firebase.auth().currentUser;
-  var credential;
+  // var credential;
 
   var setup = {
     gameState: function() {
       database.ref("player").once('value', function(snapshot) {
-        if (snapshot.child("p1/id").val() == "" || snapshot.child("p2/id").val() == "") {
-          setup.login()
-        } else {
+        if (snapshot.child("p1/id").val() !== "" && snapshot.child("p2/id").val() !== "") {
+          // setup.login()
+        // } else {
           $('#loginSec').text("THE GAME IS FULL NOW");
           $('#gameSec').hide();
+        }
+        else {
+          gameStart()
+          game.login()
         }
       })
     },
@@ -38,7 +42,6 @@ $(function() {
       }
     }
   }
-  setup.gameState();
 
   function randomNum() {
     return Math.floor(Math.random() * displayNameArr.length);
@@ -123,7 +126,7 @@ $(function() {
   };
 
   firebase.auth().onAuthStateChanged(function(user) {
-
+    // might require a check function to see if the uid is repeated.
     console.log(user);
     if (user) {
       // setup.gameState();
@@ -161,4 +164,6 @@ $(function() {
 
   });
   $('#loginOutBtn').on('click', logOut);
+  setup.login()
+gameStart();
 });

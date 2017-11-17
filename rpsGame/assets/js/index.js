@@ -21,8 +21,6 @@
     }
     // checkId();
 
-    $('#cID').on('click', startGame);
-
     function startGame() {
       database.ref("player/p1").set({ id: "", displayName: "" });
       database.ref("player/p2").set({ id: "", displayName: "" });
@@ -38,14 +36,13 @@
     });
 
     window.onload = function() {
-    
-    return startGame();
-  }
 
-  window.onbeforeunload = function() {
+      startGame();
+    }
 
-    return logOut();
-  }
+   window.onbeforeunload = function() {
+
+      logOut();
+    }
 
   });
- 
