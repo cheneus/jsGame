@@ -1,34 +1,16 @@
 $(function() {
   var hangInfo = document.getElementById('hangInfo'),
     hangOutput = document.getElementById('hangOutput'),
+    hangEnd = document.getElementById('hangEnd'),
     hangFeedback = document.getElementById('hangFeedback');
 
-  var setup = function() {
-    console.log("setup")
-    hangInfo.style.display = 'none';
-    hangOutput.style.display = 'none';
-    hangFeedback.style.display = 'none';
-  }
-
-  var guess, currentGuess, letter, letters, lettersToShow, alphabet,
-    lettersMatched = lettersGuessed = '',
-    numLettersMatched = 0,
-    lives = 5,
-    wordChoice = ['wolf', 'hyena', 'tiger', 'lion', 'puma', 'fox'],
+  var guess, lives, numLettersMatched, currentGuess, letter, letters, lettersToShow, tempId, alphabet;
+  var wordChoice = ['wolf', 'hyena', 'tiger', 'lion', 'puma', 'fox'],
     alphabet26 = "abcdefghijklmnopqrstuvwxyz";
-
-  var alphaDisplay = document.getElementById('alphabetDisplay'),
+  var lettersMatched = lettersGuessed = '',
+    alphaDisplay = document.getElementById('alphabetDisplay'),
     livesDisplay = document.getElementById('livesDisplay'),
-    wordDisplay = document.getElementById('wordDisplay'),
-    currentWord = wordChoice[Math.floor(Math.random() * wordChoice.length)];
-
-  livesDisplay.innerHTML = '<h2>' + lives + '</h2>';
-  wordDisplay.innerHTML = '';
-  for (i = 0; i < currentWord.length; i++) {
-    var tempId = "letter_" + currentWord.charAt(i).toUpperCase();
-    letter = '<li class="letter" id="letter_' + currentWord.charAt(i) + '">' + currentWord.charAt(i).toUpperCase() + '</li>'
-    wordDisplay.insertAdjacentHTML('beforeend', letter);
-  };
+    wordDisplay = document.getElementById('wordDisplay');
 
   var messages = {
     win: 'You win!',
@@ -36,6 +18,38 @@ $(function() {
     guessed: ' already guessed, please try again...',
     validLetter: 'Please enter a letter from A-Z'
   };
+
+  document.getElementById('playAgain').addEventListener('click', () => {
+    resetStat()
+      hangEnd.style.display = 'none';
+              hangOutput.style.display = 'flex';
+  })
+
+  var resetStat = function() {
+    numLettersMatched = 0,
+      lives = 5,
+      livesDisplay.innerHTML = '<h1>' + lives + '</h1>',
+      wordDisplay.innerHTML = '',
+      lettersGuessed = "",
+      currentWord = wordChoice[Math.floor(Math.random() * wordChoice.length)];
+    for (i = 0; i < currentWord.length; i++) {
+      tempId = "letter_" + currentWord.charAt(i).toUpperCase();
+      letter = '<li class="letter" id="letter_' + currentWord.charAt(i) + '">' + currentWord.charAt(i).toUpperCase() + '</li>'
+      wordDisplay.insertAdjacentHTML('beforeend', letter);
+    };
+    document.getElementById("alphaCorrect").innerHTML = '';
+    document.getElementById("alphaWrong").innerHTML = '';
+  }
+
+  var setup = function() {
+    console.log("setup")
+    resetStat()
+    console.log("reset")
+    hangInfo.style.display = 'none';
+    hangOutput.style.display = 'none';
+    hangEnd.style.display = 'none';
+    hangFeedback.style.display = 'none';
+  }
 
   var printMatched = function() {
     document.getElementById("alphaCorrect").innerHTML = '';
@@ -57,15 +71,13 @@ $(function() {
     };
   }
 
-  // var hangBegin = 
-  document.getElementById("hangStart").addEventListener('click' ,() => {
+  document.getElementById("hangStart").addEventListener('click', () => {
     console.log("clicked");
     startDiv.style.display = "none";
     hangInfo.style.display = 'flex';
     hangOutput.style.display = 'flex';
     hangFeedback.style.display = 'flex';
 
-    document.getElementById("alphaCorrect").innerHTML = '';
     document.getElementById("testInput").addEventListener('keydown', (event) => {
       const keyName = event.key;
       event.preventDefault();
@@ -83,7 +95,6 @@ $(function() {
             lettersToShow = document.querySelectorAll(".letter" + keyName.toUpperCase());
             var tempId = String("letter_" + keyName);
             document.getElementById(tempId).style.backgroundColor = 'green';
-
             for (var j = 0; j < currentWord.length; j++) {
               if (currentWord.charAt(j) === keyName) {
                 numLettersMatched += 1;
@@ -102,13 +113,15 @@ $(function() {
           else {
             lettersGuessed += keyName;
             lives--;
-            livesDisplay.innerHTML = '<h2>You have ' + lives + ' lives remaining</h2>';
+            livesDisplay.innerHTML = '<h1>You have ' + lives + ' lives remaining</h1>';
             printUnmatched();
             if (lives === 0) {
               console.log("Game Over");
               output.innerHTML = messages.lose;
               output.classList.add("alert-danger");
-              document.getElementById("testInput").removeEventListener('keydown')
+              hangEnd.style.display = 'flex';
+              hangOutput.style.display = 'none';
+              document.getElementById('wordDisplay').innerHTML ='<h1>'+currentWord.toUpperCase()+'</h1>'
             }
           }
           /* not a valid letter, error */
@@ -128,5 +141,4 @@ $(function() {
     })
   })
   setup();
-
 });

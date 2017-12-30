@@ -27,17 +27,16 @@
       </div>
     </div>
     <div class="row" id="hangInfo">
-      <div class="col-sm-6">
+      <div class="col-6">
         <div class="card text-center">
           <h4 class="card-header"> Your Lives </h4>
           <div id="livesDisplay" class="card-block">
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-6">
         <div class="card text-center">
           <h4 class="card-header">The Word for the Day</h4>
-          <p class="text-center">hint: it is either from the dog or cat family.</p>
           <div class="card-block">
             <ul id="wordDisplay">
             </ul>
@@ -45,33 +44,33 @@
         </div>
       </div>
     </div>
-    <div id="hangOutput" class="row">
+    <div id="hangEnd" class="row my-3">
+      <div class="col-12 text-center">
+        <button id="playAgain" class="btn btn-success btn-lg mx-2">Play Again !</button>
+        <button class="btn btn-danger btn-lg mx-2" onclick="window.close()">I am Done !</button>
+      </div>
+    </div>
+    <div id="hangOutput" class="row my-3">
       <div class="col-12">
         <form id="" class="form-group">
-          <h2 class="text-center">Simply start typing in characters to play</h2>
+          <h2 class="text-center">Simply start typing to play</h2>
+          <h6 class="text-center">Wild Dog / Cat</h6>
           <input id="testInput" type="text" class="form-control">
         </form>
       </div>
     </div>
-    <div id="hangFeedback" style="display: block;border: 2px solid red;padding: 5px" class="row">
-      <h3 class="text-center">Output - Feedback</h3>
-      <div id="alphaType">
-      </div>
-      <div id="keyType">
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="card card-style text-center">
-            <h4 class="card-title text-center">Correct Alphabets</h4>
-            <div id="alphaCorrect" class="card-block">
-            </div>
+    <div id="hangFeedback" class="row">
+      <div class="col-6">
+        <div class="card card-style text-center">
+          <h4 class="card-header text-center">Correct Alphabets</h4>
+          <div id="alphaCorrect" class="card-block">
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="card card-style text-center">
-            <h4 class="card-title text-center">Incorrect Alphabets</h4>
-            <div id="alphaWrong" class="card-block">
-            </div>
+      </div>
+      <div class="col-6">
+        <div class="card card-style text-center">
+          <h4 class="card-header text-center">Incorrect Alphabets</h4>
+          <div id="alphaWrong" class="card-block">
           </div>
         </div>
       </div>
