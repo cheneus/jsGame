@@ -8,6 +8,10 @@
   color: white;
 }
 
+.matched {
+  padding: 5px;
+}
+
 .correct {
   background-color: green;
   transition: all 1s ease;
