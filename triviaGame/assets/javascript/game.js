@@ -210,6 +210,7 @@ $(document).ready(function() {
       $('#gamePage').hide();
       $('#resultPage').hide();
       $('#startPage').show();
+      $('#correctAns').empty()
     }
 
   }
